@@ -1,0 +1,10 @@
+The program should print exactly 100 lines of output.
+
+Line 3 should be "Fizz".
+Line 5 should be "Buzz".
+Line 15 should be "FizzBuzz".
+Line 7 should be "7".
+Line 1 should be "1".
+Line 100 should be "Buzz".
+Line 99 should be "Fizz".
+Line 98 should be "98".

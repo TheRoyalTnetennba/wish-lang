@@ -1,0 +1,7 @@
+@name wish-counter
+@version 1.0.0
+
+A command-line counter app.
+
+Read an optional integer argument N from the command line (default: 5).
+Count aloud from 1 up to that number, waiting 300ms between each number.

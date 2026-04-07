@@ -1,0 +1,3 @@
+@name where-am-i
+
+Print the user's current location, including country, city and state/region.

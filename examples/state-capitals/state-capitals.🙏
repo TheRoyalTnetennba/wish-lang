@@ -1,0 +1,5 @@
+@name state-capitals
+
+Fetch US state capital data from the internet.
+
+Ask the user for a two letter state abbreviation (case insensitive), and print the capital of that state.

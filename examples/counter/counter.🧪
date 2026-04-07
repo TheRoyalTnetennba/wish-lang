@@ -1,0 +1,3 @@
+When run with no arguments, the program should print the numbers 1 through 5,
+
+When run with the argument 3, it should print 1, 2, 3.

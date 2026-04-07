@@ -1,0 +1,8 @@
+@name wish-fizzbuzz
+@version 1.0.0
+
+Print the numbers from 1 to 100, one per line, with these substitutions:
+- If the number is divisible by both 3 and 5, print "FizzBuzz" instead.
+- If the number is divisible by only 3, print "Fizz" instead.
+- If the number is divisible by only 5, print "Buzz" instead.
+- Otherwise, print the number itself.

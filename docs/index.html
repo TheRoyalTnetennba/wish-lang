@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wish — The Highest Level Programming Language</title>
+        <meta
+            name="description"
+            content="Wish is a highest level programming language. Write wishes. Run JavaScript."
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- ── Nav ──────────────────────────────────────────────────────────────── -->
+        <nav>
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">Wish ✨</a>
+                <ul class="nav-links">
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#install">Install</a></li>
+                    <li><a href="#language">Language</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#cli">CLI</a></li>
+                    <li><a href="#providers">Providers</a></li>
+                    <li>
+                        <a
+                            href="https://github.com/TheRoyalTnetennba/wish-lang"
+                            class="nav-gh"
+                            >GitHub ↗</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+        <section id="hero">
+            <div class="container">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        AI-powered · Natural Language · Non-deterministic
+                    </div>
+                    <h1 class="hero-title">Wish ✨</h1>
+                    <p class="hero-tagline">
+                        The
+                        <strong>HIGHEST</strong> level programming language.<br />
+                        Write wishes. Run JavaScript.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#install" class="btn btn-primary"
+                            >Get started</a
+                        >
+                        <a
+                            href="https://github.com/TheRoyalTnetennba/wish-lang"
+                            class="btn btn-secondary"
+                            >View on GitHub ↗</a
+                        >
+                    </div>
+                </div>
+
+                <div class="hero-demo">
+                    <div>
+                        <div class="file-label">where-am-i.🙏</div>
+                        <div class="code-window">
+                            <div class="code-window-bar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="code-window-title"
+                                    >where-am-i.🙏</span
+                                >
+                            </div>
+                            <pre><code><span class="tok-directive">@name</span> where-am-i
+
+Print the user's current location,
+including country, city and state/region.</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="demo-arrow">→</div>
+
+                    <div>
+                        <div class="file-label">Terminal</div>
+                        <div class="code-window">
+                            <div class="code-window-bar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="code-window-title">bash</span>
+                            </div>
+                            <pre><code><span class="tok-prompt">$</span> wish run
+<span class="tok-muted">🙏  Wish Compiler</span>
+<span class="tok-muted">→  Scanning for 🙏 files…</span>
+<span class="tok-muted">→  Compiling with anthropic…</span>
+<span class="tok-success">✓  Compilation complete!</span>
+
+<span class="tok-output" id="location-output">Current Location:
+  Country: <span id="loc-country">…</span>
+  City: <span id="loc-city">…</span>
+  Region: <span id="loc-region">…</span></span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function fillLocation(country, city, region) {
+                document.getElementById("loc-country").textContent =
+                    country || "Unknown";
+                document.getElementById("loc-city").textContent =
+                    city || "Unknown";
+                document.getElementById("loc-region").textContent =
+                    region || "Unknown";
+            }
+
+            // Primary: ipinfo.io — explicitly CORS-enabled, no auth required
+            fetch("https://ipinfo.io/json")
+                .then(function (r) {
+                    return r.json();
+                })
+                .then(function (d) {
+                    if (!d.city) throw new Error("empty");
+                    // country is a 2-letter code; region is full name
+                    fillLocation(d.country, d.city, d.region);
+                })
+                .catch(function () {
+                    // Fallback: db-ip.com — CORS-enabled, returns full country name
+                    fetch("https://api.db-ip.com/v2/free/self")
+                        .then(function (r) {
+                            return r.json();
+                        })
+                        .then(function (d) {
+                            if (!d.countryName) throw new Error("empty");
+                            fillLocation(d.countryName, d.city, d.stateProv);
+                        })
+                        .catch(function () {
+                            fillLocation("Unknown", "Unknown", "Unknown");
+                        });
+                });
+        </script>
+
+        <!-- ── How it works ──────────────────────────────────────────────────────── -->
+        <section id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Overview</p>
+                    <h2 class="section-title">How it works</h2>
+                    <p class="section-sub">Write wishes. Run JavaScript.</p>
+                </div>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <h3>Write</h3>
+                        <p>
+                            Create <code>.🙏</code> files describing what your
+                            program should do, and <code>.🧪</code> files
+                            describing how it should behave. Natural language —
+                            no syntax to learn.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <h3>Run</h3>
+                        <p>
+                            Run <code>wish run</code>. Wish compiles and
+                            executes your project. Re-runs are fast — Wish skips
+                            recompiling if nothing has changed.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <h3>Test</h3>
+                        <p>
+                            Run <code>wish test</code>. Wish generates a test
+                            suite from your <code>.🧪</code> files and verifies
+                            behaviour from the outside — outputs, exit codes,
+                            HTTP responses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Install ───────────────────────────────────────────────────────────── -->
+        <section id="install">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Installation</p>
+                    <h2 class="section-title">Get started in three steps</h2>
+                    <p class="section-sub">Requires Node.js ≥ 18 and git.</p>
+                </div>
+
+                <div class="start-steps">
+                    <div class="start-step">
+                        <div class="start-num">1</div>
+                        <div>
+                            <h3>Install Wish</h3>
+                            <div class="cb">
+                                <pre><code>curl -fsSL https://raw.githubusercontent.com/TheRoyalTnetennba/wish-lang/main/install.sh | sh</code></pre>
+                            </div>
+                            <p class="note">
+                                Clones into <code>~/.wish-lang</code>, installs
+                                dependencies, and links the
+                                <code>wish</code> command globally. Re-run at
+                                any time to update. Prefer manual control?
+                                <a
+                                    href="https://github.com/TheRoyalTnetennba/wish-lang#manual-installation"
+                                    >Install manually ↗</a
+                                >
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="start-step">
+                        <div class="start-num">2</div>
+                        <div>
+                            <h3>Add your API key</h3>
+                            <div class="cb">
+                                <pre><code>wish setup</code></pre>
+                            </div>
+                            <p class="note">
+                                Opens an interactive wizard. Pick a provider,
+                                enter your API key (masked), and optionally set
+                                a default model. Settings are saved to
+                                <code>~/.config/wish/.env</code> — every project
+                                picks them up automatically. No copying
+                                <code>.env</code> files between projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="start-step">
+                        <div class="start-num">3</div>
+                        <div>
+                            <h3>Create your first project</h3>
+                            <div class="cb">
+                                <pre><code>wish new my-app
+cd my-app
+wish run</code></pre>
+                            </div>
+                            <p class="note">
+                                Scaffolds a <code>my-app.🙏</code> with a
+                                placeholder — edit it to describe your program,
+                                then <code>wish run</code> to compile and
+                                execute.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yolo callout -->
+                <div class="yolo-card">
+                    <div class="yolo-text">
+                        <h3>🎲 Feeling lucky? Try <code>--yolo</code></h3>
+                        <p>
+                            Can't decide what to build? Pass
+                            <code>--yolo</code> to <code>wish new</code> and
+                            Wish will pick three random words, imagine what an
+                            app with that name might do, and pre-fill your
+                            <code>.🙏</code> file with the result. Ready to
+                            compile immediately.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="cb">
+                            <pre><code><span class="tok-prompt">$</span> wish new --yolo
+
+<span class="tok-success">🎲  Rolling the dice…  amber-fox-cipher</span>
+
+<span class="tok-muted">  Asking anthropic to imagine "amber-fox-cipher"…</span>
+
+<span class="tok-success">🙏  New Wish project created!</span>
+
+<span class="tok-muted">  location  ~/amber-fox-cipher</span>
+<span class="tok-muted">  source    amber-fox-cipher.🙏</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Language ───────────────────────────────────────────────────────────── -->
+        <section id="language">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Language</p>
+                    <h2 class="section-title">
+                        Two file types. No syntax to learn.
+                    </h2>
+                    <p class="section-sub">
+                        Both file types share the same simple format — comments,
+                        optional directives, and natural language.
+                    </p>
+                </div>
+
+                <div class="lang-grid">
+                    <!-- Source files -->
+                    <div class="lang-card">
+                        <div class="lang-card-head">
+                            <div class="lang-ext">🙏</div>
+                            <div>
+                                <h3>Source files &nbsp;<code>.🙏</code></h3>
+                                <p>Describe what the program should do</p>
+                            </div>
+                        </div>
+
+                        <div class="format-rows">
+                            <div class="format-row">
+                                <span class="format-tag tag-comment"
+                                    ># comment</span
+                                >
+                                <span class="format-desc"
+                                    >Stripped before compilation — notes to
+                                    yourself</span
+                                >
+                            </div>
+                            <div class="format-row">
+                                <span class="format-tag tag-directive"
+                                    >@directive value</span
+                                >
+                                <span class="format-desc"
+                                    >Metadata: <code>@name</code>,
+                                    <code>@version</code></span
+                                >
+                            </div>
+                            <div class="format-row">
+                                <span class="format-tag tag-instruction"
+                                    >everything else</span
+                                >
+                                <span class="format-desc"
+                                    >Natural language that becomes the
+                                    specification</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="code-window">
+                            <div class="code-window-bar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="code-window-title">server.🙏</span>
+                            </div>
+                            <pre><code><span class="tok-comment"># A simple JSON API</span>
+<span class="tok-directive">@name</span> my-server
+<span class="tok-directive">@version</span> 1.0.0
+
+Create an HTTP server on port 3000.
+
+GET /hello returns:
+  { "message": "Hello!", "time": &lt;ISO timestamp&gt; }
+
+Any other route returns a 404 JSON response:
+  { "error": "Not found" }
+
+Log each request method and URL to stdout.</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Test files -->
+                    <div class="lang-card">
+                        <div class="lang-card-head">
+                            <div class="lang-ext">🧪</div>
+                            <div>
+                                <h3>Test files &nbsp;<code>.🧪</code></h3>
+                                <p>Describe how the program should behave</p>
+                            </div>
+                        </div>
+
+                        <div class="format-rows">
+                            <div class="format-row">
+                                <span class="format-tag tag-comment"
+                                    ># comment</span
+                                >
+                                <span class="format-desc"
+                                    >Same as source files — ignored
+                                    entirely</span
+                                >
+                            </div>
+                            <div class="format-row">
+                                <span class="format-tag tag-instruction"
+                                    >everything else</span
+                                >
+                                <span class="format-desc"
+                                    >Observable behaviour: outputs, status
+                                    codes, side effects</span
+                                >
+                            </div>
+                        </div>
+
+                        <div class="code-window">
+                            <div class="code-window-bar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="code-window-title">server.🧪</span>
+                            </div>
+                            <pre><code><span class="tok-comment"># Verify the server API</span>
+
+GET /hello responds with status 200 and
+a JSON body containing a "message" field
+and a "time" field.
+
+GET /unknown responds with status 404 and
+a JSON body containing an "error" field.
+
+The server logs each request to stdout.</code></pre>
+                        </div>
+
+                        <p style="font-size: 0.84rem; color: var(--text-dim)">
+                            Wish compiles <code>.🧪</code> files into a
+                            <code>node:test</code> suite that runs against the
+                            generated source in <code>out/</code>. Run with
+                            <code>wish test</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Examples ───────────────────────────────────────────────────────────── -->
+        <section id="examples">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Examples</p>
+                    <h2 class="section-title">See it in action</h2>
+                </div>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="hello">
+                        Hello World
+                    </button>
+                    <button class="tab-btn" data-tab="fizzbuzz">
+                        FizzBuzz
+                    </button>
+                    <button class="tab-btn" data-tab="counter">Counter</button>
+                </div>
+
+                <!-- Hello World -->
+                <div class="tab-panel active" id="tab-hello">
+                    <div class="example-split">
+                        <div>
+                            <div class="file-label">hello-world.🙏</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >hello-world.🙏</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/hello-world/hello-world.🙏">Loading…</code></pre>
+                            </div>
+                            <div class="file-label" style="margin-top: 1.25rem">
+                                hello-world.🧪
+                            </div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >hello-world.🧪</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/hello-world/hello-world.🧪">Loading…</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="example-arrow">→</div>
+
+                        <div>
+                            <div class="file-label">Output</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title">bash</span>
+                                </div>
+                                <pre><code><span class="tok-prompt">$</span> wish run
+<span class="tok-muted">✓  Compilation complete!</span>
+
+<span class="tok-output">Hello, world!</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FizzBuzz -->
+                <div class="tab-panel" id="tab-fizzbuzz">
+                    <div class="example-split">
+                        <div>
+                            <div class="file-label">fizzbuzz.🙏</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >fizzbuzz.🙏</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/fizzbuzz/fizzbuzz.🙏">Loading…</code></pre>
+                            </div>
+                            <div class="file-label" style="margin-top: 1.25rem">
+                                fizzbuzz.🧪
+                            </div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >fizzbuzz.🧪</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/fizzbuzz/fizzbuzz.🧪">Loading…</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="example-arrow">→</div>
+
+                        <div>
+                            <div class="file-label">Output (truncated)</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title">bash</span>
+                                </div>
+                                <pre><code><span class="tok-prompt">$</span> wish run
+<span class="tok-muted">✓  Compilation complete!</span>
+
+<span class="tok-output">1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+...</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Counter -->
+                <div class="tab-panel" id="tab-counter">
+                    <div class="example-split">
+                        <div>
+                            <div class="file-label">counter.🙏</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >counter.🙏</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/counter/counter.🙏">Loading…</code></pre>
+                            </div>
+                            <div class="file-label" style="margin-top: 1.25rem">
+                                counter.🧪
+                            </div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title"
+                                        >counter.🧪</span
+                                    >
+                                </div>
+                                <pre><code data-gh="examples/counter/counter.🧪">Loading…</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="example-arrow">→</div>
+
+                        <div>
+                            <div class="file-label">Output (N=3)</div>
+                            <div class="code-window">
+                                <div class="code-window-bar">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                    <span class="code-window-title">bash</span>
+                                </div>
+                                <pre><code><span class="tok-prompt">$</span> wish run -- 3
+<span class="tok-muted">✓  Compilation complete!</span>
+
+<span class="tok-output">1
+2
+3
+Done counting to 3!</span>
+
+<span class="tok-prompt">$</span> wish test .
+<span class="tok-muted">🧪  Wish Tester</span>
+<span class="tok-muted">✓  Test compilation complete!</span>
+<span class="tok-success">✔ counter.test.js</span>
+<span class="tok-muted">ℹ pass 3  fail 0</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CLI Reference ─────────────────────────────────────────────────────── -->
+        <section id="cli">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">CLI</p>
+                    <h2 class="section-title">Command reference</h2>
+                    <p class="section-sub">
+                        Every command accepts <code>--help</code> for full
+                        option details.
+                    </p>
+                </div>
+
+                <table class="cli-table">
+                    <tbody>
+                        <tr>
+                            <td><code>wish setup</code></td>
+                            <td>
+                                Configure your provider and API key. Interactive
+                                by default — or pass flags for scripted setup:
+                                <code>--provider</code>, <code>--key</code>,
+                                <code>--model</code>, <code>--base-url</code>.
+                                Use <code>--show</code> to print current config.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish new [name]</code></td>
+                            <td>
+                                Scaffold a new Wish project — creates a
+                                directory with a starter
+                                <code>.🙏</code> file and
+                                <code>.env.example</code>. Pass
+                                <code>--yolo</code> to generate a random name
+                                and have Wish dream up the concept.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish add &lt;name&gt;</code></td>
+                            <td>
+                                Generate a <code>.🙏</code> source file in the
+                                current directory. Pass <code>--test</code> (or
+                                <code>-t</code>) to generate a
+                                <code>.🧪</code> test file instead. Alias:
+                                <code>wish g</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish compile [dir]</code></td>
+                            <td>
+                                Scan <code>[dir]</code> for
+                                <code>.🙏</code> files and compile them to a
+                                Node.js project in <code>out/</code>. Skips
+                                recompiling if nothing has changed since the
+                                last compile. Flags: <code>--output</code>,
+                                <code>--provider</code>, <code>--model</code>,
+                                <code>--base-url</code>, <code>--force</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish run [dir]</code></td>
+                            <td>
+                                Compile (if needed) and immediately run the
+                                generated project via <code>npm start</code>.
+                                Installs <code>node_modules</code>
+                                automatically if missing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish test [dir]</code></td>
+                            <td>
+                                Compile <code>.🧪</code> files into a
+                                <code>node:test</code> suite and run it.
+                                Requires <code>out/</code> to exist — run
+                                <code>wish compile</code> first. Skips
+                                recompiling if nothing has changed. If tests
+                                fail, automatically attempts
+                                <code>wish fix</code> once.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish fix [dir]</code></td>
+                            <td>
+                                Run the test suite, identify failures, and patch
+                                the generated code to make them pass. Repeats up
+                                to <code>--retries</code> times (default: 3).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>wish update</code></td>
+                            <td>
+                                Update Wish to the latest version by pulling
+                                from GitHub.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ── Providers ─────────────────────────────────────────────────────────── -->
+        <section id="providers">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-label">Providers</p>
+                    <h2 class="section-title">Works with any LLM</h2>
+                    <p class="section-sub">
+                        Cloud or local. Switch anytime with
+                        <code>wish setup</code> or a per-project
+                        <code>.env</code> override.
+                    </p>
+                </div>
+
+                <div class="providers-grid">
+                    <div class="provider-card">
+                        <h3>Anthropic</h3>
+                        <p class="sub">
+                            Recommended · <code>claude-sonnet-4-5</code> default
+                        </p>
+                        <div class="cb">
+                            <pre><code>wish setup \
+  --provider anthropic \
+  --key sk-ant-...</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="provider-card">
+                        <h3>OpenAI</h3>
+                        <p class="sub">
+                            JSON mode enabled automatically ·
+                            <code>gpt-4o</code> default
+                        </p>
+                        <div class="cb">
+                            <pre><code>wish setup \
+  --provider openai \
+  --key sk-...</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="provider-card">
+                        <h3>Local models</h3>
+                        <p class="sub">
+                            LM Studio, Ollama, any OpenAI-compatible server
+                        </p>
+                        <div class="cb">
+                            <pre><code>wish setup \
+  --provider openai-compat \
+  --base-url http://localhost:1234/v1 \
+  --model qwen3-coder</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <p
+                    style="
+                        margin-top: 2rem;
+                        font-size: 0.9rem;
+                        color: var(--text-dim);
+                    "
+                >
+                    API keys are stored in <code>~/.config/wish/.env</code> and
+                    apply to every project on your machine. Per-project
+                    <code>.env</code> files override specific values when
+                    needed.
+                </p>
+            </div>
+        </section>
+
+        <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+        <footer>
+            <div class="container">
+                <div class="footer-inner">
+                    <span>✨ Wish &nbsp;·&nbsp; MIT License</span>
+                    <ul class="footer-links">
+                        <li>
+                            <a
+                                href="https://github.com/TheRoyalTnetennba/wish-lang"
+                                >GitHub ↗</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/TheRoyalTnetennba/wish-lang/blob/main/README.md"
+                                >Docs ↗</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://github.com/TheRoyalTnetennba/wish-lang/issues"
+                                >Issues ↗</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ── Tab switching ─────────────────────────────────────────────────────── -->
+        <script>
+            document.querySelectorAll(".tab-btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const target = btn.dataset.tab;
+                    btn.closest("section")
+                        .querySelectorAll(".tab-btn")
+                        .forEach((b) => b.classList.remove("active"));
+                    btn.closest("section")
+                        .querySelectorAll(".tab-panel")
+                        .forEach((p) => p.classList.remove("active"));
+                    btn.classList.add("active");
+                    document
+                        .getElementById("tab-" + target)
+                        .classList.add("active");
+                });
+            });
+        </script>
+
+        <!-- ── Example loader ────────────────────────────────────────────────────── -->
+        <script>
+            const REPO_RAW =
+                "https://raw.githubusercontent.com/TheRoyalTnetennba/wish-lang/main";
+
+            // Minimal wish-file syntax highlighter.
+            function highlightWish(text) {
+                const esc = (s) =>
+                    s
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+
+                return text
+                    .trimEnd()
+                    .split("\n")
+                    .map((line) => {
+                        if (line.startsWith("#")) {
+                            return `<span class="tok-comment">${esc(line)}</span>`;
+                        }
+                        const m = line.match(/^(@\S+)(.*)/s);
+                        if (m) {
+                            return `<span class="tok-directive">${esc(m[1])}</span>${esc(m[2])}`;
+                        }
+                        return esc(line);
+                    })
+                    .join("\n");
+            }
+
+            async function loadExamples() {
+                const nodes = document.querySelectorAll("code[data-gh]");
+
+                await Promise.all(
+                    [...nodes].map(async (node) => {
+                        const path = node.dataset.gh;
+                        // Encode each path segment individually so emoji
+                        // filenames are percent-encoded correctly.
+                        const encoded = path
+                            .split("/")
+                            .map(encodeURIComponent)
+                            .join("/");
+                        try {
+                            const res = await fetch(`${REPO_RAW}/${encoded}`);
+                            if (!res.ok) throw new Error(res.status);
+                            const text = await res.text();
+                            node.innerHTML = highlightWish(text);
+                        } catch {
+                            node.textContent = "(could not load example)";
+                            node.style.color = "var(--text-faint)";
+                        }
+                    }),
+                );
+            }
+
+            loadExamples();
+        </script>
+    </body>
+</html>
