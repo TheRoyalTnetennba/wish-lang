@@ -149,7 +149,7 @@ You can also edit it directly — it's a standard `.env` file:
 
 ```sh
 ANTHROPIC_API_KEY=sk-ant-...
-# WISH_MODEL=claude-sonnet-4-5
+# WISH_MODEL=claude-sonnet-4-6
 ```
 
 > **XDG:** If `$XDG_CONFIG_HOME` is set, the config lives at `$XDG_CONFIG_HOME/wish/.env`.
@@ -190,7 +190,7 @@ For local models (LM Studio, Ollama, etc.) set `WISH_PROVIDER=openai-compat` exp
 
 | Provider        | Default model       |
 |-----------------|---------------------|
-| `anthropic`     | `claude-sonnet-4-5` |
+| `anthropic`     | `claude-sonnet-4-6` |
 | `openai`        | `gpt-4o`            |
 | `openai-compat` | `local-model`       |
 
@@ -527,7 +527,9 @@ Don't say "use a `for` loop". Focus on *what* the program should do, not *how*. 
 
 ## Why
 
-🤷 - in case it's unclear, this is a somewhat tongue-in-cheek project
+🤷 - in case it's unclear, this is a somewhat tongue-in-cheek project. Thought it'd
+be fun to start with the assumption that everything said about LLM's capabilities 
+by the people who sell them was _literally_ true and build from there.
 
 ---
 
@@ -537,7 +539,7 @@ Don't say "use a `for` loop". Focus on *what* the program should do, not *how*. 
 
 | Provider    | Env var             | Default model       | Notes |
 |---|---|---|---|
-| `anthropic` | `ANTHROPIC_API_KEY` | `claude-sonnet-4-5` | Auto-detected when key is present. |
+| `anthropic` | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` | Auto-detected when key is present. |
 | `openai`    | `OPENAI_API_KEY`    | `gpt-4o`            | JSON mode enabled automatically. |
 
 ### Local (no API key required)
@@ -599,6 +601,14 @@ export class MyProvider {
 Both methods receive arrays of `{ path, content }` objects and must return the same shape. Add a default model entry in `src/config.js` and the provider name to the supported list in `src/providers/index.js`.
 
 ---
+
+## FAQs
+
+* **Q: Emoji file extensions are super annoying. Any plans on changing?**  
+  A: I hear you.
+
+* **Q: Will other language compilation targets be supported?**  
+  A: I'd kinda like to add go support at some point.
 
 ## License
 
