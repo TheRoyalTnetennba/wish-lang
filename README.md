@@ -527,7 +527,9 @@ Don't say "use a `for` loop". Focus on *what* the program should do, not *how*. 
 
 ## Why
 
-🤷 - in case it's unclear, this is a somewhat tongue-in-cheek project
+🤷 - in case it's unclear, this is a somewhat tongue-in-cheek project. Thought it'd
+be fun to start with the assumption that everything said about LLM's capabilities 
+by the people who sell them was _literally_ true and build from there.
 
 ---
 
