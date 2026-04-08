@@ -24,7 +24,7 @@ const PROVIDER_KEY_VAR = {
 };
 
 const PROVIDER_DEFAULT_MODEL = {
-  anthropic: "claude-sonnet-4-5",
+  anthropic: "claude-sonnet-4-6",
   openai: "gpt-4o",
   "openai-compat": "local-model",
 };

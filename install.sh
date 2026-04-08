@@ -195,7 +195,7 @@ if [ ! -f "$GLOBAL_ENV" ]; then
 # WISH_BASE_URL=http://localhost:11434/v1  # Ollama
 
 # ── Optional overrides ────────────────────────────────────────────────────────
-# WISH_MODEL=claude-sonnet-4-5
+# WISH_MODEL=claude-sonnet-4-6
 # WISH_MODEL=gpt-4o
 # WISH_OUTPUT_DIR=out
 # WISH_TEST_OUTPUT_DIR=test-out

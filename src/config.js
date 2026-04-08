@@ -5,7 +5,7 @@ import { config as loadDotenv } from "dotenv";
 
 const DEFAULT_MODELS = {
   openai: "gpt-4o",
-  anthropic: "claude-sonnet-4-5",
+  anthropic: "claude-sonnet-4-6",
   "openai-compat": "local-model",
 };
 
@@ -80,7 +80,8 @@ export function loadConfig(projectDir, cliOverrides = {}) {
 
   // Retries for tests and fixes and syntactic loops
   const rawRetries = cliOverrides.retries ?? process.env.WISH_RETRIES;
-  const retries = rawRetries !== undefined ? parseInt(String(rawRetries), 10) : 3;
+  const retries =
+    rawRetries !== undefined ? parseInt(String(rawRetries), 10) : 3;
 
   // Base URL — used by the openai-compat provider.
   const baseUrl = cliOverrides.baseUrl || process.env.WISH_BASE_URL;

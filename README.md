@@ -149,7 +149,7 @@ You can also edit it directly — it's a standard `.env` file:
 
 ```sh
 ANTHROPIC_API_KEY=sk-ant-...
-# WISH_MODEL=claude-sonnet-4-5
+# WISH_MODEL=claude-sonnet-4-6
 ```
 
 > **XDG:** If `$XDG_CONFIG_HOME` is set, the config lives at `$XDG_CONFIG_HOME/wish/.env`.
@@ -190,7 +190,7 @@ For local models (LM Studio, Ollama, etc.) set `WISH_PROVIDER=openai-compat` exp
 
 | Provider        | Default model       |
 |-----------------|---------------------|
-| `anthropic`     | `claude-sonnet-4-5` |
+| `anthropic`     | `claude-sonnet-4-6` |
 | `openai`        | `gpt-4o`            |
 | `openai-compat` | `local-model`       |
 
@@ -537,7 +537,7 @@ Don't say "use a `for` loop". Focus on *what* the program should do, not *how*. 
 
 | Provider    | Env var             | Default model       | Notes |
 |---|---|---|---|
-| `anthropic` | `ANTHROPIC_API_KEY` | `claude-sonnet-4-5` | Auto-detected when key is present. |
+| `anthropic` | `ANTHROPIC_API_KEY` | `claude-sonnet-4-6` | Auto-detected when key is present. |
 | `openai`    | `OPENAI_API_KEY`    | `gpt-4o`            | JSON mode enabled automatically. |
 
 ### Local (no API key required)
