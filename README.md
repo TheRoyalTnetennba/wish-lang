@@ -602,6 +602,14 @@ Both methods receive arrays of `{ path, content }` objects and must return the s
 
 ---
 
+## FAQs
+
+* **Q: Emoji file extensions are super annoying. Any plans on changing?**  
+  A: I hear you.
+
+* **Q: Will other language compilation targets be supported?**  
+  A: I'd kinda like to add go support at some point.
+
 ## License
 
 MIT
