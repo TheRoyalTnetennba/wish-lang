@@ -130,7 +130,7 @@ step "Linking 'wish' command..."
 link_output=$( (cd "$INSTALL_DIR" && npm link) 2>&1 ) && linked=true || linked=false
 
 if $linked; then
-  ok "'wish' linked to $(npm bin -g 2>/dev/null || npm prefix -g)/bin/wish"
+  ok "'wish' linked to $(npm prefix -g 2>/dev/null)/bin/wish"
 else
   # Check whether it was a permissions error
   case "$link_output" in
@@ -166,55 +166,21 @@ else
   warn "Then reload your shell:  source ~/.zshrc  (or ~/.bashrc)"
 fi
 
-# ── Global config ─────────────────────────────────────────────────────────────
+# ── Global config directory ───────────────────────────────────────────────────
 #
-# Create ~/.config/wish/.env if it doesn't exist yet. This is where users set
-# their API keys once — every wish project will pick them up automatically.
+# Create ~/.config/wish/ so wish setup has a place to write to.
+# The actual config is written by `wish setup` — don't pre-populate it here.
 
-step "Setting up global config..."
-
+step "Setting up global config directory..."
 mkdir -p "$CONFIG_DIR"
-
-if [ ! -f "$GLOBAL_ENV" ]; then
-  cat > "$GLOBAL_ENV" << 'EOF'
-# 🙏 Wish — Global Configuration
-# Set your API key(s) here once. Every wish project will pick them up
-# automatically. Per-project .env files override these values when present.
-
-# ── LLM Provider ──────────────────────────────────────────────────────────────
-# Auto-detected from whichever key is present below.
-# Uncomment to pin a specific provider:
-# WISH_PROVIDER=anthropic
-
-# ── API Keys ──────────────────────────────────────────────────────────────────
-# ANTHROPIC_API_KEY=sk-ant-...
-# OPENAI_API_KEY=sk-...
-# ── Local providers (no API key needed) ───────────────────────────────────────
-# WISH_PROVIDER=openai-compat
-# WISH_BASE_URL=http://localhost:1234/v1   # LM Studio
-# WISH_BASE_URL=http://localhost:11434/v1  # Ollama
-
-# ── Optional overrides ────────────────────────────────────────────────────────
-# WISH_MODEL=claude-sonnet-4-6
-# WISH_MODEL=gpt-4o
-# WISH_OUTPUT_DIR=out
-# WISH_TEST_OUTPUT_DIR=test-out
-EOF
-  ok "Created $GLOBAL_ENV"
-else
-  ok "Global config already exists at $GLOBAL_ENV"
-fi
+ok "Config directory ready at $CONFIG_DIR"
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 
 printf "\n${BOLD}  Installation complete!${RESET}\n\n"
 
-printf "  ${BOLD}Step 1 — Add your API key:${RESET}\n\n"
-printf "    ${CYAN}%s${RESET}\n" "$GLOBAL_ENV"
-printf "\n"
-printf "  Open that file and uncomment one of:\n\n"
-printf "    ANTHROPIC_API_KEY=sk-ant-...\n"
-printf "    OPENAI_API_KEY=sk-...\n"
+printf "  ${BOLD}Step 1 — Configure your API key:${RESET}\n\n"
+printf "    ${CYAN}wish setup${RESET}\n"
 printf "\n"
 printf "  ${BOLD}Step 2 — Build something:${RESET}\n\n"
 printf "    ${CYAN}wish new my-app${RESET}\n"
